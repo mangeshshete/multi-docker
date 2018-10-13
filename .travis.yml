@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t mangeshshete/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t shloks/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run mangeshshete/react-test npm test -- --coverage
+  - docker run shloks/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t mangeshshete/multi-client ./client
-  - docker build -t mangeshshete/multi-nginx ./nginx
-  - docker build -t mangeshshete/multi-server ./server
-  - docker build -t mangeshshete/multi-worker ./worker
+  - docker build -t shloks/multi-client ./client
+  - docker build -t shloks/multi-nginx ./nginx
+  - docker build -t shloks/multi-server ./server
+  - docker build -t shloks/multi-worker ./worker
   # Log in to the docker CLI Mangesh Shete
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push mangeshshete/multi-client
-  - docker push mangeshshete/multi-nginx
-  - docker push mangeshshete/multi-server
-  - docker push mangeshshete/multi-worker
+  - docker push shloks/multi-client
+  - docker push shloks/multi-nginx
+  - docker push shloks/multi-server
+  - docker push shloks/multi-worker
